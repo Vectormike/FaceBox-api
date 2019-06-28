@@ -1,5 +1,5 @@
-const express = require('express');
-const index = require('../src/routes/index');
+import express from 'express';
+import index from '../src/routes/index';
 
 const app = express();
 
