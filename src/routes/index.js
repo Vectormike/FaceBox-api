@@ -1,9 +1,8 @@
 import express from 'express';
 const router = express.Router();
 
+import Middleware from '../middleware/middleware';
 
-router.get('/', (req, res) => {
-    res.send('Welcome');
-})
+router.post('/register', Middleware.authorize)
 
 export default router;
