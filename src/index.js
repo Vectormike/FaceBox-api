@@ -1,6 +1,9 @@
 import express from 'express';
+import bodyParser from 'body-parser';
 import index from '../src/routes/index';
 import knex from 'knex';
+import 'debug'
+
 
 const db = knex({
     client: 'pg',
@@ -18,6 +21,11 @@ db.select('*').from('users').then(data =>{
 
 const app = express();
 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false}))
+
+// parse application/json
+app.use(bodyParser.json());
 
 app.use('/', index);
 
