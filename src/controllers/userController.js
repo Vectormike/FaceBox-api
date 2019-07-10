@@ -13,21 +13,23 @@ const db = knex({
 });
 
 export function register(req, res) {
-    const {email, name} = req.body;
-    deb(req.body)
+    
         db('users').insert({
-            email: email,
-            name: name,
+            name: req.body.name,
+            email: req.body.email,
             joined: new Date()
         })
         .then(user => {
             res.status(200).json({
                 message: 'User Created',
                 user: {
-                    email: user.email,
-                    name: user.name
+                    name: user.name,
+                    email: user.email
             }
+            
         })
+
+    deb(req.body)
     })
 }
 
