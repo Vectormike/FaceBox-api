@@ -3,8 +3,10 @@ const router = express.Router();
 
 
 // import Middleware from '../middleware/middleware';
-import * as Controller from '../controllers/userController';
+import  Controller from '../controllers/userController';
 
-router.post('/register', Controller.register)
+const { register } = Controller;
+
+router.post('/register', register)
 
 export default router;
