@@ -12,27 +12,24 @@ const db = knex({
     }
 });
 
-export class userController{
-    static register()
-        db('users').insert({
-            name: req.body.name,
-            email: req.body.email,
-            joined: new Date()
+class userController{
+        static register(req, res) {
+            const { name, email, password} = req.body;
+            db('users').insert({
+                name: name,
+                email: email,
+                joined: new Date()
+            })
+            .then(user => {
+                res.status(201).json({
+                    message: 'User Created',
+                    user: {
+                        name: user.name,
+                        email: user.email
+                }      
+            })
         })
-        .then(user => {
-            res.status(200).json({
-                message: 'User Created',
-                user: {
-                    name: user.name,
-                    email: user.email
-            }
-            
-        })
-
-    deb(req.body)
-    })
-}
-
+    }
 }
 
 export default userController;
