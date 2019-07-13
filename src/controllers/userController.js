@@ -12,8 +12,8 @@ const db = knex({
     }
 });
 
-export function register(req, res) {
-    
+export class userController{
+    static register()
         db('users').insert({
             name: req.body.name,
             email: req.body.email,
@@ -33,3 +33,6 @@ export function register(req, res) {
     })
 }
 
+}
+
+export default userController;
