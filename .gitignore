@@ -1,6 +1,6 @@
 #Dependencies
 
 node_modules
-.babelrc
-.prettierrc
-.eslintrc.js
+/.babelrc
+/.prettierrc
+/.eslintrc.js
