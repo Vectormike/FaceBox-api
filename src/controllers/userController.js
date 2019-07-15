@@ -1,7 +1,7 @@
 import knex from 'knex';
-import debug from 'debug';
+// import debug from 'debug';
 
-const deb = debug('app:app.register');
+// const deb = debug('app:app.register');
 
 const database = knex({
   client: 'pg',
@@ -15,35 +15,34 @@ const database = knex({
 
 class userController {
   static register(req, res) {
-    const { name, email, password } = req.body;
+    const { name, email } = req.body;
 
-    // Check if user exists with email else create account
+    // register
     database('users')
-      .where({ email })
+      .insert({
+        name,
+        email,
+        joined: new Date(),
+      })
       .then(user => {
-        if (user) {
-          res.status(409).json({
-            message: 'User exists',
-            code: 409,
-          });
-        } else {
-          database('users')
-            .insert({
-              name,
-              email,
-              joined: new Date(),
-            })
-            .then(user => {
-              res.status(201).json({
-                message: 'User Created',
-                user: {
-                  name: user.name,
-                  email: user.email,
-                },
-              });
-            });
-        }
-      });
+        res.status(201).json({
+          message: 'User Created',
+          user: {
+            name: user.name,
+            email: user.email,
+          },
+        });
+      })
+      .catch(_err => res.status(400).json('Unable to register'));
+  }
+
+  static login(req, res) {
+    const { name, email } = req.body;
+
+    //login
+    //database query
+    //check if user exist, throw no user
+    //If user exist, allow...
   }
 }
 
